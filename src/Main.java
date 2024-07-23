@@ -10,7 +10,7 @@ public class Main {
 
         System.out.println("Welcome to the game of Hanged man! Try guessing letters in the word, before the poor man gets hanged!");
 
-        String finalWord = "hamster";
+        String finalWord = "HAMSTER";
         int mistakes = 0;
         List<String> letters = new ArrayList<>();
         List<String> spaces = new ArrayList<>();
@@ -53,7 +53,10 @@ public class Main {
                 break;
             }
             System.out.println("Guess a letter: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().toUpperCase().trim();
+            if (input.equals("")) {
+                continue;
+            }
             boolean correct = false;
             for (int i = 0; i < letters.size(); i++) {
                 if (letters.get(i).equals(input)) {
