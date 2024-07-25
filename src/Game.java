@@ -11,8 +11,8 @@ public class Game {
         List<String> wordsToGuess = readFile("words.txt");
 
         while (true) {
-
-            Round round = new Round(pickRandomWord(wordsToGuess));
+            MirroredGallows gallows = new MirroredGallows();
+            Round round = new Round(pickRandomWord(wordsToGuess), gallows);
 
             round.start(scanner);
             System.out.println("Do you want to play again? Press Y to continue or N to quit.");

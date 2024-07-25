@@ -1,4 +1,4 @@
-public class Gallows implements ProgressIndicator {
+public class MirroredGallows implements ProgressIndicator {
 
     @Override
     public void print(int mistakes) {
@@ -16,11 +16,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |
-                   |
-                   |
-                   |
-                   |
+                         |
+                         |
+                         |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -30,11 +30,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
-                   |
-                   |
-                   |
-                   |
+                   O     |
+                         |
+                         |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -44,11 +44,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
+                   O     |
                    |     |
-                   |
-                   |
-                   |
+                         |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -58,11 +58,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
-                   |    /|
-                   |
-                   |
-                   |
+                   O     |
+                  /|     |
+                         |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -72,11 +72,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
-                   |    /|\\
-                   |
-                   |
-                   |
+                   O     |
+                  /|\\    |
+                         |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -86,11 +86,11 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
-                   |    /|\\
-                   |    /
-                   |
-                   |
+                   O     |
+                  /|\\    |
+                  /      |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
@@ -100,14 +100,13 @@ public class Gallows implements ProgressIndicator {
         System.out.print("""
                    _______
                    |     |
-                   |     O
-                   |    /|\\
-                   |    / \\
-                   |
-                   |
+                   O     |
+                  /|\\    |
+                  /|\\    |
+                         |
+                         |
                 =============
                 """);
         System.out.println("");
     }
-
 }

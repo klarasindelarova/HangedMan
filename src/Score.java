@@ -1,5 +1,6 @@
-public class Score {
+public class Score implements ProgressIndicator {
 
+    @Override
     public void print(int mistakes) {
         System.out.println(mistakes + "/6");
     }
