@@ -8,7 +8,7 @@ public class Round {
     private Set<String> usedLettersCorrect = new HashSet<>();
     private Set<String> usedLettersWrong = new HashSet<>();
 
-    private Gallows gallowsPrinter = new Gallows();
+    private Score score = new Score();
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_RED = "\u001B[31m";
@@ -27,7 +27,7 @@ public class Round {
         while (underscores.contains("_")) {
             printUnderscores(underscores);
 
-            gallowsPrinter.print(mistakes);
+            score.print(mistakes);
             if (mistakes == 6) {
                 printDefeatText();
                 victory = false;
@@ -76,7 +76,7 @@ public class Round {
     private void printVictoryText(int mistakes) {
         printTheWholeWord(this.wordToGuess);
         System.out.println("");
-        gallowsPrinter.print(mistakes);
+        score.print(mistakes);
         System.out.println("Good job! The man survived!");
 
         System.out.println("");
