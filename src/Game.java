@@ -9,28 +9,11 @@ public class Game {
         boolean playAgain = true;
         while (playAgain) {
             Scanner scanner = new Scanner(System.in);
-            List<String> wordsToGuess = new ArrayList<>();
+            List<String> wordsToGuess = readAFile("words.txt");
 
-            try (Scanner reader = new Scanner(Paths.get("words.txt"))) {
-                while (reader.hasNextLine()) {
-                    String row = reader.nextLine();
-                    wordsToGuess.add(row);
-                }
-            } catch (Exception e) {
-                System.out.println("Error! " + e);
-            }
-            int index = 0;
-            Random randomNumber = new Random();
-            index = randomNumber.nextInt(wordsToGuess.size());
+            String finalWord = pickingRandomWord(wordsToGuess);
 
-            String finalWord = wordsToGuess.get(index).toUpperCase();
-
-            char abc = 0;
-            List<String> alphabet = new ArrayList<>();
-            for (abc = 'A'; abc <= 'Z'; abc++) {
-                alphabet.add(String.valueOf(abc));
-            }
-
+            List<String> alphabet = generateAlphabet();
 
             List<String> letters = new ArrayList<>();
             List<String> spaces = new ArrayList<>();
@@ -56,25 +39,19 @@ public class Game {
                 System.out.println("");
                 printGallows(mistakes);
                 if (mistakes == 6) {
-                        System.out.println("Oh no! Poor man!");
-                        System.out.println("The word was: " + finalWord);
-                        victory = false;
-                        break;
+                    System.out.println("Oh no! Poor man!");
+                    System.out.println("The word was: " + finalWord);
+                    victory = false;
+                    break;
                 }
 
                 System.out.println("Letters to use. Already used letters are colored (red - incorrect, green - correct):");
 
-                for (int i = 0; i < alphabet.size(); i++) {
-                    if (usedLettersCorrect.contains(alphabet.get(i))) {
-                        alphabet.set(i, ANSI_GREEN + alphabet.get(i) + ANSI_RESET);
-                    }
-                    if (usedLettersWrong.contains(alphabet.get(i))) {
-                        alphabet.set(i, ANSI_RED + alphabet.get(i) + ANSI_RESET);
-                    }
-                }
-                for (String a : alphabet) {
-                    System.out.print(a + " ");
-                }
+                colourLettersGreen(alphabet, usedLettersCorrect);
+                colourLettersRed(alphabet, usedLettersWrong);
+
+                printColouredAlphabet(alphabet);
+
                 System.out.println("");
                 System.out.println("");
 
@@ -105,27 +82,7 @@ public class Game {
                     System.out.print(finalWord.charAt(i) + " ");
                 }
                 System.out.println("");
-                if (mistakes == 0) {
-                    printDefaultGallows();
-                }
-                if (mistakes == 1) {
-                    printHead();
-                }
-                if (mistakes == 2) {
-                    printTorso();
-                }
-                if (mistakes == 3) {
-                    printRightHand();
-                }
-                if (mistakes == 4) {
-                    printLeftHand();
-                }
-                if (mistakes == 5) {
-                    printRightLeg();
-                }
-                if (mistakes == 6) {
-                    printLeftLeg();
-                }
+                printGallows(mistakes);
                 System.out.println("Good job! The man survived!");
 
                 System.out.println("");
@@ -140,6 +97,56 @@ public class Game {
 
     }
 
+    public void colourLettersGreen(List<String> alphabet, List<String> correct) {
+        for (int i = 0; i < alphabet.size(); i++) {
+            if (correct.contains(alphabet.get(i))) {
+                alphabet.set(i, ANSI_GREEN + alphabet.get(i) + ANSI_RESET);
+            }
+        }
+    }
+    public void colourLettersRed(List<String> alphabet, List<String> wrong) {
+        for (int i = 0; i < alphabet.size(); i++) {
+            if (wrong.contains(alphabet.get(i))) {
+                alphabet.set(i, ANSI_RED + alphabet.get(i) + ANSI_RESET);
+            }
+        }
+    }
+    public List<String> generateAlphabet() {
+        char abc = 0;
+        List<String> alphabet = new ArrayList<>();
+        for (abc = 'A'; abc <= 'Z'; abc++) {
+            alphabet.add(String.valueOf(abc));
+        }
+        return alphabet;
+    }
+
+    public void printColouredAlphabet(List<String> alphabet) {
+        for (String a : alphabet) {
+            System.out.print(a + " ");
+        }
+    }
+    public String pickingRandomWord(List<String> list) {
+        int index = 0;
+        Random randomNumber = new Random();
+        index = randomNumber.nextInt(list.size());
+
+        String finalWord = list.get(index).toUpperCase();
+
+        return finalWord;
+    }
+
+    public List<String> readAFile(String file) {
+        List<String> wordsFromFile = new ArrayList<>();
+        try (Scanner reader = new Scanner(Paths.get(file))) {
+            while (reader.hasNextLine()) {
+                String row = reader.nextLine();
+                wordsFromFile.add(row);
+            }
+        } catch (Exception e) {
+            System.out.println("Error! " + e);
+        }
+        return wordsFromFile;
+    }
 
     public void printGallows(int mistakes) {
         switch (mistakes) {
