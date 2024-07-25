@@ -12,7 +12,7 @@ public class Gallows implements ProgressIndicator {
             case 6 -> printLeftLeg();
         }
     }
-    private void printDefaultGallows() {
+    protected void printDefaultGallows() {
         System.out.print("""
                    _______
                    |     |
@@ -26,25 +26,25 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
-    private void printHead() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    private void printTorso() {
+    protected void printHead() {
         System.out.print("""
                    _______
                    |     |
                    |     O
+                   |
+                   |
+                   |
+                   |
+                =============
+                """);
+        System.out.println("");
+    }
+
+    protected void printTorso() {
+        System.out.print("""
+                   _______
+                   |     |
+                   |     O
                    |     |
                    |
                    |
@@ -54,7 +54,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
-    private void printRightHand() {
+    protected void printRightHand() {
         System.out.print("""
                    _______
                    |     |
@@ -68,7 +68,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
-    private void printLeftHand() {
+    protected void printLeftHand() {
         System.out.print("""
                    _______
                    |     |
@@ -82,7 +82,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
-    private void printRightLeg() {
+    protected void printRightLeg() {
         System.out.print("""
                    _______
                    |     |
@@ -96,7 +96,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
-    private void printLeftLeg() {
+    protected void printLeftLeg() {
         System.out.print("""
                    _______
                    |     |
