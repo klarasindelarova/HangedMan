@@ -8,7 +8,6 @@ public class Game {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         List<String> wordsToGuess = readAFile("words.txt");
-        List<String> alphabet = generateAlphabet();
         boolean playAgain = true;
 
         while (playAgain) {
@@ -16,6 +15,7 @@ public class Game {
             System.out.println("Welcome to the game of Hanged man! Try guessing letters in the word, before the poor man gets hanged!");
 
             String finalWord = pickingRandomWord(wordsToGuess);
+            List<String> alphabet = generateAlphabet();
             List<String> letters = new ArrayList<>();
             List<String> underscores = new ArrayList<>();
             List<String> usedLettersCorrect = new ArrayList<>();
@@ -33,7 +33,9 @@ public class Game {
                 printGallows(mistakes);
                 if (mistakes == 6) {
                     System.out.println("Oh no! Poor man!");
-                    System.out.println("The word was: " + finalWord);
+                    printTheWholeWord(finalWord);
+                    System.out.println("");
+                    System.out.println("");
                     victory = false;
                     break;
                 }
