@@ -1,17 +1,7 @@
-public class Gallows {
+public class RightGallows extends AbstractGallows {
 
-    public void print(int mistakes) {
-        switch (mistakes) {
-            case 0 -> printDefaultGallows();
-            case 1 -> printHead();
-            case 2 -> printTorso();
-            case 3 -> printRightHand();
-            case 4 -> printLeftHand();
-            case 5 -> printRightLeg();
-            case 6 -> printLeftLeg();
-        }
-    }
-    private void printDefaultGallows() {
+    @Override
+    protected void printDefaultGallows() {
         System.out.print("""
                    _______
                    |     |
@@ -25,7 +15,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printHead() {
+    @Override
+    protected void printHead() {
         System.out.print("""
                    _______
                    |     |
@@ -39,7 +30,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printTorso() {
+    @Override
+    protected void printTorso() {
         System.out.print("""
                    _______
                    |     |
@@ -53,7 +45,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printRightHand() {
+    @Override
+    protected void printRightHand() {
         System.out.print("""
                    _______
                    |     |
@@ -67,7 +60,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printLeftHand() {
+    @Override
+    protected void printLeftHand() {
         System.out.print("""
                    _______
                    |     |
@@ -81,7 +75,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printRightLeg() {
+    @Override
+    protected void printRightLeg() {
         System.out.print("""
                    _______
                    |     |
@@ -95,7 +90,8 @@ public class Gallows {
         System.out.println("");
     }
 
-    private void printLeftLeg() {
+    @Override
+    protected void printLeftLeg() {
         System.out.print("""
                    _______
                    |     |

@@ -9,10 +9,11 @@ public class Game {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         List<String> wordsToGuess = readFile("words.txt");
+        ProgressIndicator progressIndicator = new RightGallows();
 
         while (true) {
 
-            Round round = new Round(pickRandomWord(wordsToGuess));
+            Round round = new Round(pickRandomWord(wordsToGuess), progressIndicator);
 
             round.start(scanner);
             System.out.println("Do you want to play again? Press Y to continue or N to quit.");
