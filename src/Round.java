@@ -50,14 +50,18 @@ public class Round {
             if (input.equals("")) {
                 continue;
             }
-            int index = letters.indexOf(input);
-            if (index == -1) {
+            boolean correct = false;
+            for (int i = 0; i < letters.size(); i++) {
+                if (letters.get(i).equals(input)) {
+                    underscores.set(i, input);
+                    usedLettersCorrect.add(input);
+                    correct = true;
+                }
+            }
+            if (!correct) {
                 System.out.println("Wrong guess!");
                 usedLettersWrong.add(input);
                 mistakes = mistakes + 1;
-            } else {
-                underscores.set(index, input);
-                usedLettersCorrect.add(input);
             }
         }
 
