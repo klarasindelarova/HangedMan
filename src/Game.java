@@ -5,148 +5,28 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        List<String> wordsToGuess = readAFile("words.txt");
-        boolean playAgain = true;
+        List<String> wordsToGuess = readFile("words.txt");
 
-        while (playAgain) {
-            System.out.println("");
-            System.out.println("Welcome to the game of Hanged man! Try guessing letters in the word, before the poor man gets hanged!");
+        while (true) {
 
-            String finalWord = pickingRandomWord(wordsToGuess);
-            List<String> alphabet = generateAlphabet();
-            List<String> letters = new ArrayList<>();
-            List<String> underscores = new ArrayList<>();
-            List<String> usedLettersCorrect = new ArrayList<>();
-            List<String> usedLettersWrong = new ArrayList<>();
-            splittingTheWord(finalWord, letters, underscores);
-            boolean victory = true;
-            int mistakes = 0;
+            Round round = new Round(pickRandomWord(wordsToGuess));
 
-            while (underscores.contains("_")) {
-                System.out.println("");
-                System.out.print("Word: ");
-                printUnderscores(underscores);
-                System.out.println("");
-
-                printGallows(mistakes);
-                if (mistakes == 6) {
-                    System.out.println("Oh no! Poor man!");
-                    printTheWholeWord(finalWord);
-                    System.out.println("");
-                    System.out.println("");
-                    victory = false;
-                    break;
-                }
-
-                System.out.println("Letters to use. Already used letters are colored (red - incorrect, green - correct):");
-
-                colourLettersGreen(alphabet, usedLettersCorrect);
-                colourLettersRed(alphabet, usedLettersWrong);
-
-                printColouredAlphabet(alphabet);
-
-                System.out.println("");
-                System.out.println("");
-
-                System.out.println("Guess a letter: ");
-                String input = scanner.nextLine().toUpperCase().trim();
-                if (input.equals("")) {
-                    continue;
-                }
-                boolean correct = false;
-                for (int i = 0; i < letters.size(); i++) {
-                    if (letters.get(i).equals(input)) {
-                        underscores.set(i, input);
-                        usedLettersCorrect.add(input);
-                        correct = true;
-                    }
-                }
-                if (!correct) {
-                    System.out.println("Wrong guess!");
-                    usedLettersWrong.add(input);
-                    mistakes = mistakes + 1;
-                }
-
-            }
-
-            if (victory) {
-                printTheWholeWord(finalWord);
-                System.out.println("");
-                printGallows(mistakes);
-                System.out.println("Good job! The man survived!");
-
-                System.out.println("");
-            }
+            round.start(scanner);
             System.out.println("Do you want to play again? Press Y to continue or N to quit.");
             String decision = scanner.nextLine();
             if (decision.equalsIgnoreCase("n")) {
-                playAgain = false;
+                break;
             }
 
         }
 
     }
-
-    public void colourLettersGreen(List<String> alphabet, List<String> correct) {
-        for (int i = 0; i < alphabet.size(); i++) {
-            if (correct.contains(alphabet.get(i))) {
-                alphabet.set(i, ANSI_GREEN + alphabet.get(i) + ANSI_RESET);
-            }
-        }
-    }
-    public void colourLettersRed(List<String> alphabet, List<String> wrong) {
-        for (int i = 0; i < alphabet.size(); i++) {
-            if (wrong.contains(alphabet.get(i))) {
-                alphabet.set(i, ANSI_RED + alphabet.get(i) + ANSI_RESET);
-            }
-        }
-    }
-    public void printUnderscores(List<String> spaces) {
-        for (String a : spaces) {
-            System.out.print(a + " ");
-        }
-    }
-
-    public void splittingTheWord (String word, List<String> letters, List<String> spaces) {
-        String [] parts = word.split("(?!^)");
-        for (int i = 0; i < word.length(); i++) {
-            letters.add(parts[i]);
-            spaces.add("_");
-        }
-    }
-    public List<String> generateAlphabet() {
-        char abc = 0;
-        List<String> alphabet = new ArrayList<>();
-        for (abc = 'A'; abc <= 'Z'; abc++) {
-            alphabet.add(String.valueOf(abc));
-        }
-        return alphabet;
-    }
-    public void printTheWholeWord(String word) {
-        System.out.print("Word: ");
-        for (int i = 0; i < word.length(); i++) {
-            System.out.print(word.charAt(i) + " ");
-        }
-    }
-
-    public void printColouredAlphabet(List<String> alphabet) {
-        for (String a : alphabet) {
-            System.out.print(a + " ");
-        }
-    }
-    public String pickingRandomWord(List<String> list) {
-        int index = 0;
-        Random randomNumber = new Random();
-        index = randomNumber.nextInt(list.size());
-
-        return list.get(index).toUpperCase();
-    }
-
-    public List<String> readAFile(String file) {
+    private List<String> readFile(String fileName) {
         List<String> wordsFromFile = new ArrayList<>();
-        try (Scanner reader = new Scanner(Paths.get(file))) {
+        try (Scanner reader = new Scanner(Paths.get(fileName))) {
             while (reader.hasNextLine()) {
                 String row = reader.nextLine();
                 wordsFromFile.add(row);
@@ -157,133 +37,11 @@ public class Game {
         return wordsFromFile;
     }
 
-    public void printGallows(int mistakes) {
-        switch (mistakes) {
-            case 0:
-                printDefaultGallows();
-                break;
-            case 1:
-                printHead();
-                break;
-            case 2:
-                printTorso();
-                break;
-            case 3:
-                printRightHand();
-                break;
-            case 4:
-                printLeftHand();
-                break;
-            case 5:
-                printRightLeg();
-                break;
-            case 6:
-                printLeftLeg();
-                break;
-        }
+    public String pickRandomWord(List<String> list) {
+        Random random = new Random();
+        int index = random.nextInt(list.size());
+
+        return list.get(index).toUpperCase();
     }
 
-    public void printDefaultGallows() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |
-                   |
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printHead() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printTorso() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |     |
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printRightHand() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |    /|
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printLeftHand() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |    /|\\
-                   |
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printRightLeg() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |    /|\\
-                   |    /
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public void printLeftLeg() {
-        System.out.print("""
-                   _______
-                   |     |
-                   |     O
-                   |    /|\\
-                   |    / \\
-                   |
-                   |
-                =============
-                """);
-        System.out.println("");
-    }
-
-    public final String ANSI_RESET = "\u001B[0m";
-
-    public final String ANSI_GREEN = "\u001B[32m";
-
-    public final String ANSI_RED = "\u001B[31m";
 }
