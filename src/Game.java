@@ -6,37 +6,30 @@ import java.util.Scanner;
 
 public class Game {
     public void start() {
+        Scanner scanner = new Scanner(System.in);
+        List<String> wordsToGuess = readAFile("words.txt");
+        List<String> alphabet = generateAlphabet();
         boolean playAgain = true;
+
         while (playAgain) {
-            Scanner scanner = new Scanner(System.in);
-            List<String> wordsToGuess = readAFile("words.txt");
-
-            String finalWord = pickingRandomWord(wordsToGuess);
-
-            List<String> alphabet = generateAlphabet();
-
-            List<String> letters = new ArrayList<>();
-            List<String> spaces = new ArrayList<>();
-            List<String> usedLettersCorrect = new ArrayList<>();
-            List<String> usedLettersWrong = new ArrayList<>();
-
-            String[] parts = finalWord.split("(?!^)");
-            for (int i = 0; i < finalWord.length(); i++) {
-                letters.add(parts[i]);
-                spaces.add("_");
-            }
             System.out.println("");
             System.out.println("Welcome to the game of Hanged man! Try guessing letters in the word, before the poor man gets hanged!");
+
+            String finalWord = pickingRandomWord(wordsToGuess);
+            List<String> letters = new ArrayList<>();
+            List<String> underscores = new ArrayList<>();
+            List<String> usedLettersCorrect = new ArrayList<>();
+            List<String> usedLettersWrong = new ArrayList<>();
+            splittingTheWord(finalWord, letters, underscores);
             boolean victory = true;
             int mistakes = 0;
-            while (spaces.contains("_")) {
+
+            while (underscores.contains("_")) {
                 System.out.println("");
                 System.out.print("Word: ");
-                for (int i = 0; i < spaces.size(); i++) {
-                    System.out.print(spaces.get(i) + " ");
-                }
-
+                printUnderscores(underscores);
                 System.out.println("");
+
                 printGallows(mistakes);
                 if (mistakes == 6) {
                     System.out.println("Oh no! Poor man!");
@@ -63,7 +56,7 @@ public class Game {
                 boolean correct = false;
                 for (int i = 0; i < letters.size(); i++) {
                     if (letters.get(i).equals(input)) {
-                        spaces.set(i, input);
+                        underscores.set(i, input);
                         usedLettersCorrect.add(input);
                         correct = true;
                     }
@@ -77,10 +70,7 @@ public class Game {
             }
 
             if (victory) {
-                System.out.print("Word: ");
-                for (int i = 0; i < finalWord.length(); i++) {
-                    System.out.print(finalWord.charAt(i) + " ");
-                }
+                printTheWholeWord(finalWord);
                 System.out.println("");
                 printGallows(mistakes);
                 System.out.println("Good job! The man survived!");
@@ -111,6 +101,19 @@ public class Game {
             }
         }
     }
+    public void printUnderscores(List<String> spaces) {
+        for (String a : spaces) {
+            System.out.print(a + " ");
+        }
+    }
+
+    public void splittingTheWord (String word, List<String> letters, List<String> spaces) {
+        String [] parts = word.split("(?!^)");
+        for (int i = 0; i < word.length(); i++) {
+            letters.add(parts[i]);
+            spaces.add("_");
+        }
+    }
     public List<String> generateAlphabet() {
         char abc = 0;
         List<String> alphabet = new ArrayList<>();
@@ -118,6 +121,12 @@ public class Game {
             alphabet.add(String.valueOf(abc));
         }
         return alphabet;
+    }
+    public void printTheWholeWord(String word) {
+        System.out.print("Word: ");
+        for (int i = 0; i < word.length(); i++) {
+            System.out.print(word.charAt(i) + " ");
+        }
     }
 
     public void printColouredAlphabet(List<String> alphabet) {
@@ -130,9 +139,7 @@ public class Game {
         Random randomNumber = new Random();
         index = randomNumber.nextInt(list.size());
 
-        String finalWord = list.get(index).toUpperCase();
-
-        return finalWord;
+        return list.get(index).toUpperCase();
     }
 
     public List<String> readAFile(String file) {
