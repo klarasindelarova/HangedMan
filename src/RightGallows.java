@@ -1,17 +1,6 @@
-public class Gallows implements ProgressIndicator {
+public class RightGallows extends AbstractGallows {
 
     @Override
-    public void print(int mistakes) {
-        switch (mistakes) {
-            case 0 -> printDefaultGallows();
-            case 1 -> printHead();
-            case 2 -> printTorso();
-            case 3 -> printRightHand();
-            case 4 -> printLeftHand();
-            case 5 -> printRightLeg();
-            case 6 -> printLeftLeg();
-        }
-    }
     protected void printDefaultGallows() {
         System.out.print("""
                    _______
@@ -26,6 +15,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printHead() {
         System.out.print("""
                    _______
@@ -40,6 +30,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printTorso() {
         System.out.print("""
                    _______
@@ -54,6 +45,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printRightHand() {
         System.out.print("""
                    _______
@@ -68,6 +60,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printLeftHand() {
         System.out.print("""
                    _______
@@ -82,6 +75,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printRightLeg() {
         System.out.print("""
                    _______
@@ -96,6 +90,7 @@ public class Gallows implements ProgressIndicator {
         System.out.println("");
     }
 
+    @Override
     protected void printLeftLeg() {
         System.out.print("""
                    _______
