@@ -16,9 +16,9 @@ public class Game {
             Round round = new Round(pickRandomWord(wordsToGuess), progressIndicator);
 
             round.start(scanner);
-            System.out.println("Do you want to play again? Press Y to continue or N to quit.");
+            System.out.println("Do you want to play again? Press Y to continue. Any other letter quits the game.");
             String decision = scanner.nextLine();
-            if (decision.equalsIgnoreCase("n")) {
+            if (!decision.equalsIgnoreCase("y")) {
                 break;
             }
 
