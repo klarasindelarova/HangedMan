@@ -1,15 +1,19 @@
-public class LeftGallows extends AbstractGallows {
+package hangedMan.domain;
+
+import hangedMan.domain.AbstractGallows;
+
+public class RightGallows extends AbstractGallows {
 
     @Override
     protected void printDefaultGallows() {
         System.out.print("""
                    _______
                    |     |
-                         |
-                         |
-                         |
-                         |
-                         |
+                   |
+                   |
+                   |
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -20,11 +24,11 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
-                         |
-                         |
-                         |
-                         |
+                   |     O
+                   |
+                   |
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -35,11 +39,11 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
+                   |     O
                    |     |
-                         |
-                         |
-                         |
+                   |
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -50,11 +54,11 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
-                  /|     |
-                         |
-                         |
-                         |
+                   |     O
+                   |    /|
+                   |
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -65,11 +69,11 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
-                  /|\\    |
-                         |
-                         |
-                         |
+                   |     O
+                   |    /|\\
+                   |
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -80,11 +84,11 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
-                  /|\\    |
-                  /      |
-                         |
-                         |
+                   |     O
+                   |    /|\\
+                   |    /
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
@@ -95,13 +99,14 @@ public class LeftGallows extends AbstractGallows {
         System.out.print("""
                    _______
                    |     |
-                   O     |
-                  /|\\    |
-                  /|\\    |
-                         |
-                         |
+                   |     O
+                   |    /|\\
+                   |    / \\
+                   |
+                   |
                 =============
                 """);
         System.out.println("");
     }
+
 }

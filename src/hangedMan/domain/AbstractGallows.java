@@ -1,3 +1,5 @@
+package hangedMan.domain;
+
 public abstract class AbstractGallows implements ProgressIndicator {
 
     @Override

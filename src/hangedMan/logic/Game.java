@@ -1,8 +1,14 @@
+package hangedMan.logic;
+
+import hangedMan.domain.ProgressIndicator;
+import hangedMan.domain.RightGallows;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
 
 public class Game {
 
@@ -25,6 +31,7 @@ public class Game {
         }
 
     }
+
     private List<String> readFile(String fileName) {
         List<String> wordsFromFile = new ArrayList<>();
         try (Scanner reader = new Scanner(Paths.get(fileName))) {
