@@ -1,2 +1,2 @@
-## Hanged Man hangedMan.logic.Game
+## Hanged Man
 Word game

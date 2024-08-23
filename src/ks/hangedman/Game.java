@@ -1,7 +1,4 @@
-package hangedMan.logic;
-
-import hangedMan.domain.ProgressIndicator;
-import hangedMan.domain.RightGallows;
+package ks.hangedman;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;

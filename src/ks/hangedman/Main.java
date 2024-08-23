@@ -1,4 +1,4 @@
-import hangedMan.logic.Game;
+package ks.hangedman;
 
 public class Main {
     public static void main(String[] args) {

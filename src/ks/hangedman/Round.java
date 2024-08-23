@@ -1,6 +1,4 @@
-package hangedMan.logic;
-
-import hangedMan.domain.ProgressIndicator;
+package ks.hangedman;
 
 import java.util.*;
 

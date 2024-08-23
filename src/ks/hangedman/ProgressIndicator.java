@@ -1,4 +1,4 @@
-package hangedMan.domain;
+package ks.hangedman;
 
 public interface ProgressIndicator {
 

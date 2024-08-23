@@ -1,6 +1,4 @@
-package hangedMan.domain;
-
-import hangedMan.domain.ProgressIndicator;
+package ks.hangedman;
 
 public class Score implements ProgressIndicator {
 
