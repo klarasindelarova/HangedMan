@@ -1,2 +1,2 @@
-## Hanged Man Game
+## Hanged Man
 Word game

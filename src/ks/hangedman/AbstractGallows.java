@@ -1,3 +1,5 @@
+package ks.hangedman;
+
 public abstract class AbstractGallows implements ProgressIndicator {
 
     @Override

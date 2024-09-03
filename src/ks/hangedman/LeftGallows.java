@@ -1,3 +1,5 @@
+package ks.hangedman;
+
 public class LeftGallows extends AbstractGallows {
 
     @Override
