@@ -35,8 +35,8 @@ public class Round {
                 break;
             }
 
-            colourLetters(alphabet, usedLettersCorrect, Colour.CYAN);
-            colourLetters(alphabet, usedLettersWrong, Colour.BLUE);
+            colourLetters(alphabet, usedLettersCorrect, Colour.PURPLE);
+            colourLetters(alphabet, usedLettersWrong, Colour.YELLOW);
 
             System.out.println("Letters to use. Already used letters are coloured:");
 
@@ -88,9 +88,10 @@ public class Round {
     }
 
     private void colourLetters(List<String> list, Set<String> toColour, Colour colour ) {
+        String reset = "\u001B[0m";
         for (int i = 0; i < list.size(); i++) {
             if (toColour.contains(list.get(i))) {
-                list.set(i, colour.getColourCode() + list.get(i) + Colour.RESET.getColourCode());
+                list.set(i, colour.getColourCode() + list.get(i) + reset);
             }
         }
     }
