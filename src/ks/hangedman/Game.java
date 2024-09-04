@@ -9,10 +9,16 @@ import java.util.Scanner;
 
 public class Game {
 
-    public void start() {
+    public void start(String sourceFileName) {
         Scanner scanner = new Scanner(System.in);
-        List<String> wordsToGuess = readFile("words.txt");
+        List<String> wordsToGuess = readFile(sourceFileName);
+        if (wordsToGuess.isEmpty()) {
+            System.out.println("The words in your file aren't of acceptable format. Hanged man will be launched"
+                    + " with a default set of words.");
+            wordsToGuess = readFile("words.txt");
+        }
         ProgressIndicator progressIndicator = new RightGallows();
+
 
         while (true) {
 
@@ -24,22 +30,38 @@ public class Game {
             if (!decision.equalsIgnoreCase("y")) {
                 break;
             }
-
         }
-
     }
 
     private List<String> readFile(String fileName) {
         List<String> wordsFromFile = new ArrayList<>();
         try (Scanner reader = new Scanner(Paths.get(fileName))) {
             while (reader.hasNextLine()) {
-                String row = reader.nextLine();
-                wordsFromFile.add(row);
+                String row = reader.nextLine().toLowerCase();
+                String[] singleWords = row.split("\\s+");
+                if (singleWords.length > 1) {
+                    wordsFromFile.clear();
+                    break;
+                } else if (singleWords.length < 1) {
+                    wordsFromFile.clear();
+                    break;
+                } else {
+                    if (isAlphabetic(singleWords[0])) {
+                        wordsFromFile.add(singleWords[0]);
+                    } else {
+                        wordsFromFile.clear();
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
             System.out.println("Error! " + e);
         }
         return wordsFromFile;
+    }
+
+    public boolean isAlphabetic(String word) {
+        return word.matches("^[a-zA-Z]+$");
     }
 
     public String pickRandomWord(List<String> list) {
