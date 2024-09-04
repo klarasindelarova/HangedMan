@@ -11,9 +11,6 @@ public class Round {
     private Set<String> usedLettersWrong = new HashSet<>();
 
     private ProgressIndicator progressIndicator;
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_RED = "\u001B[31m";
 
     public Round(String word, ProgressIndicator progressIndicator) {
         this.wordToGuess = word;
@@ -38,10 +35,10 @@ public class Round {
                 break;
             }
 
-            System.out.println("Letters to use. Already used letters are colored (red - incorrect, green - correct):");
+            colourLetters(alphabet, usedLettersCorrect, Colour.PURPLE);
+            colourLetters(alphabet, usedLettersWrong, Colour.YELLOW);
 
-            colourLetters(alphabet, usedLettersCorrect, ANSI_GREEN);
-            colourLetters(alphabet, usedLettersWrong, ANSI_RED);
+            System.out.println("Letters to use. Already used letters are coloured:");
 
             printAlphabet(alphabet);
 
@@ -90,13 +87,15 @@ public class Round {
         System.out.println("");
     }
 
-    private void colourLetters(List<String> list, Set<String> toColour, String colour) {
+    private void colourLetters(List<String> list, Set<String> toColour, Colour colour ) {
+        String reset = "\u001B[0m";
         for (int i = 0; i < list.size(); i++) {
             if (toColour.contains(list.get(i))) {
-                list.set(i, colour + list.get(i) + ANSI_RESET);
+                list.set(i, colour.getColourCode() + list.get(i) + reset);
             }
         }
     }
+
     public void printUnderscores(List<String> spaces) {
         System.out.println("");
         System.out.print("Word: ");
