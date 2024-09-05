@@ -16,6 +16,8 @@ public class Game {
             System.out.println("Reading of your file has failed. Hanged man is launched"
                     + " with a default set of words.");
             wordsToGuess = readFile("words.txt");
+        } else {
+            System.out.println("Reading of your file was successful. Total count of your words: " + wordsToGuess.size());
         }
         ProgressIndicator progressIndicator = new RightGallows();
 
@@ -40,18 +42,18 @@ public class Game {
                 String row = reader.nextLine().toLowerCase();
                 String[] singleWords = row.split("\\s+");
                 if (singleWords.length > 1) {
-                    System.out.println("Unacceptable format. There are more characters than one word on each line in your file.");
+                    System.out.println("Error! There are more characters than just one word on this line: " + row);
                     wordsFromFile.clear();
                     break;
                 } else if (singleWords.length < 1) {
-                    System.out.println("Unacceptable format. There is at least one empty line in your file.");
+                    System.out.println("Error! There is at least one empty line in your file.");
                     wordsFromFile.clear();
                     break;
                 } else {
                     if (isAlphabetic(singleWords[0])) {
                         wordsFromFile.add(singleWords[0]);
                     } else {
-                        System.out.println("Unacceptable format. There are special characters in your file.");
+                        System.out.println("Error! There are special characters on this line: " + row);
                         wordsFromFile.clear();
                         break;
                     }
