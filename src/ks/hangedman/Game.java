@@ -13,7 +13,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         List<String> wordsToGuess = readFile(sourceFileName);
         if (wordsToGuess.isEmpty()) {
-            System.out.println("The words in your file aren't of acceptable format. Hanged man will be launched"
+            System.out.println("Reading of your file has failed. Hanged man is launched"
                     + " with a default set of words.");
             wordsToGuess = readFile("words.txt");
         }
@@ -40,15 +40,18 @@ public class Game {
                 String row = reader.nextLine().toLowerCase();
                 String[] singleWords = row.split("\\s+");
                 if (singleWords.length > 1) {
+                    System.out.println("Unacceptable format. There are more characters than one word on each line in your file.");
                     wordsFromFile.clear();
                     break;
                 } else if (singleWords.length < 1) {
+                    System.out.println("Unacceptable format. There is at least one empty line in your file.");
                     wordsFromFile.clear();
                     break;
                 } else {
                     if (isAlphabetic(singleWords[0])) {
                         wordsFromFile.add(singleWords[0]);
                     } else {
+                        System.out.println("Unacceptable format. There are special characters in your file.");
                         wordsFromFile.clear();
                         break;
                     }
